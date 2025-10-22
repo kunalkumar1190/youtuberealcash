@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTubeReal Cash - Watch Videos & Earn Real Money</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1321820464810403" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFD166;
+            --dark: #1A1A2E;
+            --light: #F5F5F5;
+            --success: #4CAF50;
+            --warning: #FF9800;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #16213E 100%);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .logo-text h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .token-count {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        /* Main Content Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        /* Video Section */
+        .video-input {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .video-input input {
+            flex: 1;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .video-input input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            margin-top: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+        }
+        
+        .video-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        /* Banner Ad below video */
+        .video-banner-ad {
+            width: 100%;
+            background: white;
+            color: #333;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90px;
+        }
+        
+        .video-banner-ad .ad-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .video-banner-ad .ad-text {
+            color: #666;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+        
+        .video-banner-ad .ad-cta {
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .video-banner-ad .ad-label {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 8px;
+        }
+        
+        /* Timer and Progress */
+        .timer-section {
+            margin-top: 25px;
+        }
+        
+        .timer-display {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .timer-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+        }
+        
+        .timer-card:first-child {
+            margin-left: 0;
+        }
+        
+        .timer-card:last-child {
+            margin-right: 0;
+        }
+        
+        .timer-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        .progress-container {
+            margin-top: 20px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Account Section */
+        .token-balance-card {
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(78, 205, 196, 0.2));
+            border-radius: 15px;
+        }
+        
+        .token-balance {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 10px 0;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .withdrawal-section {
+            margin-top: 25px;
+        }
+        
+        .withdrawal-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .withdrawal-btn {
+            width: 100%;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .withdrawal-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .withdrawal-btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            display: block;
+        }
+        
+        .error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #F44336;
+            display: block;
+        }
+        
+        /* Ad Sections */
+        .ad-section {
+            margin: 20px 0;
+        }
+        
+        .ad-container {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 15px 0;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .ad-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ad-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .ad-text {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .ad-cta {
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 10px;
+        }
+        
+        .horizontal-ad {
+            grid-column: 1 / -1;
+            margin-top: 20px;
+        }
+        
+        .sidebar-ad {
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Status Indicator */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--warning);
+        }
+        
+        .status-dot.active {
+            background: var(--success);
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        /* AdMob Ad Styles */
+        .admob-ad {
+            width: 100%;
+            background: #f8f8f8;
+            border: 1px solid #e7e7e7;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin: 15px 0;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .admob-ad .ad-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .admob-ad .ad-text {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .admob-ad .ad-cta {
+            background: #4285F4;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .horizontal-ad {
+                grid-column: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .video-input {
+                flex-direction: column;
+            }
+            
+            .timer-display {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .timer-card {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-money-bill-wave"></i>
+                <div class="logo-text">
+                    <h1>YouTubeReal Cash</h1>
+                    <p>Watch videos and earn real money</p>
+                </div>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <div>Welcome, User!</div>
+                    <div class="token-count">Tokens: <span id="header-token-balance">0.00</span></div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Watch & Earn</h2>
+                    <div class="earning-rate">
+                        <i class="fas fa-coins"></i> 0.5 tokens/30 seconds
+                    </div>
+                </div>
+                
+                <div class="video-input">
+                    <input type="text" id="video-url" placeholder="Paste YouTube video URL here...">
+                    <button class="btn" id="load-video">
+                        <i class="fas fa-play"></i> Load Video
+                    </button>
+                </div>
+                
+                <!-- AdMob Banner Ad -->
+                <div class="admob-ad">
+                    <div class="ad-title">AdMob Advertisement</div>
+                    <div class="ad-text">This is where your AdMob ads will appear</div>
+                    <div class="ad-cta">Learn More</div>
+                </div>
+                
+                <div class="video-wrapper">
+                    <div class="video-container" id="video-player">
+                        <div class="video-placeholder">
+                            <i class="fab fa-youtube"></i>
+                            <p>Enter a YouTube URL above to start watching and earning</p>
+                        </div>
+                    </div>
+                    <div class="video-banner-ad">
+                        <div class="ad-title">Limited Time Offer!</div>
+                        <div class="ad-text">Premium users earn 2x tokens - Upgrade now!</div>
+                        <div class="ad-cta">Learn More</div>
+                        <div class="ad-label">Advertisement</div>
+                    </div>
+                </div>
+                
+                <div class="status-indicator">
+                    <div class="status-dot" id="status-dot"></div>
+                    <div id="status-text">Tab is active - You're earning tokens!</div>
+                </div>
+                
+                <div class="timer-section">
+                    <div class="timer-display">
+                        <div class="timer-card">
+                            <div class="timer-label">Time Watched</div>
+                            <div class="timer-value" id="time-display">0m 0s</div>
+                        </div>
+                        <div class="timer-card">
+                            <div class="timer-label">Tokens Earned</div>
+                            <div class="timer-value" id="tokens-display">0.00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>0 tokens</span>
+                            <span>Goal: 100 tokens</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AdMob Banner Ad -->
+                <div class="admob-ad">
+                    <div class="ad-title">AdMob Advertisement</div>
+                    <div class="ad-text">This is where your AdMob ads will appear</div>
+                    <div class="ad-cta">Learn More</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Your Earnings</h2>
+                    <i class="fas fa-wallet"></i>
+                </div>
+                
+                <div class="token-balance-card">
+                    <div>Current Balance</div>
+                    <div class="token-balance" id="token-balance">0.00</div>
+                    <div>tokens</div>
+                </div>
+                
+                <div class="withdrawal-section">
+                    <div class="withdrawal-info">
+                        <i class="fas fa-info-circle"></i> 
+                        Minimum withdrawal: 100 tokens
+                    </div>
+                    <button class="btn withdrawal-btn" id="withdraw-btn" disabled>
+                        <i class="fas fa-money-bill-wave"></i> Request Withdrawal
+                    </button>
+                    <div class="message" id="withdrawal-message"></div>
+                </div>
+                
+                <!-- AdMob Banner Ad -->
+                <div class="admob-ad">
+                    <div class="ad-title">AdMob Advertisement</div>
+                    <div class="ad-text">This is where your AdMob ads will appear</div>
+                    <div class="ad-cta">Learn More</div>
+                </div>
+                
+                <div class="sidebar-ad">
+                    <div class="ad-container">
+                        <div class="ad-title">Premium Membership</div>
+                        <div class="ad-text">Get 2x earning rate and remove all ads with our premium plan</div>
+                        <div class="ad-cta">Upgrade Now</div>
+                        <div class="ad-label">Advertisement</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ad-section horizontal-ad">
+                <div class="ad-container">
+                    <div class="ad-title">Limited Time Offer</div>
+                    <div class="ad-text">Refer friends and earn 10% of their earnings forever!</div>
+                    <div class="ad-cta">Learn More</div>
+                    <div class="ad-label">Advertisement</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AdMob Banner Ad -->
+        <div class="admob-ad">
+            <div class="ad-title">AdMob Advertisement</div>
+            <div class="ad-text">This is where your AdMob ads will appear</div>
+            <div class="ad-cta">Learn More</div>
+        </div>
+        
+        <footer>
+            <p>YouTubeReal Cash &copy; 2023 | Developed by Kunal Kumar</p>
+            <p>Contact support: support@youtuberealcash.com</p>
+        </footer>
+    </div>
+
+    <!-- Withdrawal Modal -->
+    <div class="modal" id="withdrawal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Withdrawal Request</h3>
+                <button class="close-modal" id="close-withdrawal-modal">&times;</button>
+            </div>
+            <form id="withdrawal-form">
+                <div class="form-group">
+                    <label for="withdrawal-amount">Withdrawal Amount (Tokens)</label>
+                    <input type="text" id="withdrawal-amount" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="user-name">Full Name</label>
+                    <input type="text" id="user-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="user-email">Email Address</label>
+                    <input type="email" id="user-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="payment-method">Payment Method</label>
+                    <select id="payment-method" required>
+                        <option value="">Select Payment Method</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="bank">Bank Transfer</option>
+                        <option value="upi">UPI</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="payment-details">Payment Details (Account/UPI ID)</label>
+                    <input type="text" id="payment-details" required>
+                </div>
+                <button type="submit" class="btn withdrawal-btn" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Submit Withdrawal Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize variables
+        let totalSeconds = 0;
+        let tokenBalance = 0;
+        let timerInterval = null;
+        let isVideoPlaying = false;
+        let currentVideoId = '';
+        let isTabActive = true;
+        
+        // DOM Elements
+        const videoUrlInput = document.getElementById('video-url');
+        const loadVideoBtn = document.getElementById('load-video');
+        const videoPlayer = document.getElementById('video-player');
+        const timeDisplay = document.getElementById('time-display');
+        const tokensDisplay = document.getElementById('tokens-display');
+        const tokenBalanceDisplay = document.getElementById('token-balance');
+        const headerTokenBalance = document.getElementById('header-token-balance');
+        const withdrawBtn = document.getElementById('withdraw-btn');
+        const withdrawalMessage = document.getElementById('withdrawal-message');
+        const progressFill = document.getElementById('progress-fill');
+        const statusDot = document.getElementById('status-dot');
+        const statusText = document.getElementById('status-text');
+        const withdrawalModal = document.getElementById('withdrawal-modal');
+        const closeWithdrawalModal = document.getElementById('close-withdrawal-modal');
+        const withdrawalForm = document.getElementById('withdrawal-form');
+        const withdrawalAmountInput = document.getElementById('withdrawal-amount');
+        
+        // Tab visibility detection - Only earn when tab is active
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // Tab is inactive
+                isTabActive = false;
+                statusDot.classList.remove('active');
+                statusText.textContent = 'Tab is inactive - You are NOT earning tokens';
+                stopTimer();
+            } else {
+                // Tab is active
+                isTabActive = true;
+                statusDot.classList.add('active');
+                statusText.textContent = 'Tab is active - You\'re earning tokens!';
+                
+                // Only restart timer if we have a video loaded
+                if (currentVideoId) {
+                    startTimer();
+                }
+            }
+        });
+        
+        // Load YouTube video
+        loadVideoBtn.addEventListener('click', function() {
+            const videoUrl = videoUrlInput.value.trim();
+            
+            if (!videoUrl) {
+                showMessage('Please enter a YouTube video URL', 'error');
+                return;
+            }
+            
+            // Extract video ID from URL
+            let videoId = '';
+            if (videoUrl.includes('youtube.com/watch?v=')) {
+                videoId = videoUrl.split('v=')[1];
+                const ampersandPosition = videoId.indexOf('&');
+                if (ampersandPosition !== -1) {
+                    videoId = videoId.substring(0, ampersandPosition);
+                }
+            } else if (videoUrl.includes('youtu.be/')) {
+                videoId = videoUrl.split('youtu.be/')[1];
+                const questionMarkPosition = videoId.indexOf('?');
+                if (questionMarkPosition !== -1) {
+                    videoId = videoId.substring(0, questionMarkPosition);
+                }
+            }
+            
+            if (!videoId) {
+                showMessage('Invalid YouTube URL. Please check and try again.', 'error');
+                return;
+            }
+            
+            currentVideoId = videoId;
+            loadVideoInContainer(videoId, videoPlayer);
+            
+            // Reset timer and start tracking
+            resetTimer();
+            
+            // Only start timer if tab is active
+            if (isTabActive) {
+                startTimer();
+            }
+            
+            showMessage('Video loaded! Start watching to earn tokens.', 'success');
+        });
+        
+        // Load video in specified container
+        function loadVideoInContainer(videoId, container) {
+            // Create YouTube iframe with enhanced parameters to prevent redirects
+            container.innerHTML = `
+                <iframe 
+                    src="https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1&rel=0&modestbranding=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    id="video-iframe">
+                </iframe>
+            `;
+        }
+        
+        // Timer functions
+        function startTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            
+            timerInterval = setInterval(function() {
+                // Only increment if tab is active
+                if (isTabActive) {
+                    totalSeconds++;
+                    updateDisplay();
+                }
+            }, 1000);
+        }
+        
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+        
+        function resetTimer() {
+            totalSeconds = 0;
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            
+            // CHANGED: Now 0.5 tokens per 30 seconds (doubled from previous rate)
+            // This means 1 token per minute instead of 0.5 per minute
+            const tokens = (totalSeconds / 30) * 0.5;
+            
+            timeDisplay.textContent = `${minutes}m ${seconds}s`;
+            tokensDisplay.textContent = tokens.toFixed(2);
+            
+            // Update token balance
+            tokenBalance = parseFloat(tokens);
+            tokenBalanceDisplay.textContent = tokenBalance.toFixed(2);
+            headerTokenBalance.textContent = tokenBalance.toFixed(2);
+            
+            // Update progress bar
+            const progressPercent = Math.min((tokenBalance / 100) * 100, 100);
+            progressFill.style.width = `${progressPercent}%`;
+            
+            // Enable/disable withdrawal button
+            if (tokenBalance >= 100) {
+                withdrawBtn.disabled = false;
+                withdrawBtn.innerHTML = '<i class="fas fa-money-bill-wave"></i> Request Withdrawal (' + tokenBalance.toFixed(2) + ' tokens)';
+            } else {
+                withdrawBtn.disabled = true;
+                withdrawBtn.innerHTML = '<i class="fas fa-money-bill-wave"></i> Request Withdrawal';
+            }
+        }
+        
+        // Withdrawal functionality
+        withdrawBtn.addEventListener('click', function() {
+            if (tokenBalance >= 100) {
+                // Show withdrawal form modal
+                withdrawalAmountInput.value = tokenBalance.toFixed(2) + ' tokens';
+                withdrawalModal.style.display = 'flex';
+            } else {
+                showMessage('You need at least 100 tokens to withdraw. Keep watching!', 'error');
+            }
+        });
+        
+        // Close withdrawal modal
+        closeWithdrawalModal.addEventListener('click', function() {
+            withdrawalModal.style.display = 'none';
+        });
+        
+        // Submit withdrawal form
+        withdrawalForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('user-name').value,
+                email: document.getElementById('user-email').value,
+                paymentMethod: document.getElementById('payment-method').value,
+                paymentDetails: document.getElementById('payment-details').value,
+                tokens: tokenBalance.toFixed(2),
+                date: new Date().toISOString()
+            };
+            
+            // Submit to Google Sheets (you need to set up a Google Apps Script for this)
+            submitToGoogleSheets(formData);
+            
+            // Close modal
+            withdrawalModal.style.display = 'none';
+            
+            // Reset token balance and timer
+            tokenBalance = 0;
+            totalSeconds = 0;
+            updateDisplay();
+            stopTimer();
+            
+            withdrawBtn.disabled = true;
+            
+            // Reset form
+            withdrawalForm.reset();
+        });
+        
+        // Function to submit data to Google Sheets
+        function submitToGoogleSheets(data) {
+            // You need to replace this URL with your Google Apps Script web app URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyEF_CEFZUmEra5bmd4dKPq4b-pZw4E74_eM-BKdZjc0jriMjt17LtKJBQj6zdlta0m/exec';
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showMessage(`Withdrawal request for ${data.tokens} tokens submitted successfully! We will process it within 24-48 hours.`, 'success');
+                } else {
+                    showMessage('There was an error submitting your request. Please try again.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showMessage('There was an error submitting your request. Please try again.', 'error');
+            });
+        }
+        
+        // Show message
+        function showMessage(text, type) {
+            withdrawalMessage.textContent = text;
+            withdrawalMessage.className = 'message ' + type;
+            
+            // Hide message after 5 seconds
+            setTimeout(function() {
+                withdrawalMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Initialize display
+        updateDisplay();
+        
+        // Initialize status indicator
+        statusDot.classList.add('active');
+        
+        // Simulate ad interactions for demo purposes
+        document.querySelectorAll('.ad-cta').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Thank you for your interest! This is a demo advertisement.');
+            });
+        });
+        
+        // Initialize AdMob ads (placeholder - replace with actual AdMob code)
+        // In a real implementation, you would initialize AdMob here
+        console.log('AdMob ads initialized');
+    </script>
+</body>
+</html>
