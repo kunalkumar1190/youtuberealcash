@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter Interview Questions & Answers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0175C2;
+            --primary-dark: #02569B;
+            --secondary: #13B9FD;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --success: #34A853;
+            --warning: #FBBC04;
+            --danger: #EA4335;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2rem 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+        }
+
+        .content-wrapper {
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .categories {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .category-header {
+            padding: 15px 20px;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .category-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-item:last-child {
+            border-bottom: none;
+        }
+
+        .category-item:hover {
+            background: var(--light-gray);
+        }
+
+        .category-item.active {
+            background: rgba(1, 117, 194, 0.1);
+            border-left: 4px solid var(--primary);
+            font-weight: 600;
+        }
+
+        .category-count {
+            background: var(--light-gray);
+            color: var(--gray);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .category-item.active .category-count {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Questions Section */
+        .questions-section {
+            flex: 1;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .difficulty-filter {
+            display: flex;
+            gap: 10px;
+        }
+
+        .difficulty-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            background: var(--light-gray);
+            color: var(--gray);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .difficulty-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .questions-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
+            padding: 15px 20px;
+            background: var(--light);
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .question-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question-number {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .question-difficulty {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .difficulty-basic {
+            background: rgba(52, 168, 83, 0.2);
+            color: var(--success);
+        }
+
+        .difficulty-intermediate {
+            background: rgba(251, 188, 4, 0.2);
+            color: var(--warning);
+        }
+
+        .difficulty-advanced {
+            background: rgba(234, 67, 53, 0.2);
+            color: var(--danger);
+        }
+
+        .question-answer {
+            padding: 20px;
+            display: none;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .question-answer.active {
+            display: block;
+        }
+
+        .answer-content {
+            line-height: 1.7;
+        }
+
+        .answer-content p {
+            margin-bottom: 15px;
+        }
+
+        .answer-content ul, .answer-content ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .answer-content li {
+            margin-bottom: 8px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .toggle-icon {
+            transition: var(--transition);
+        }
+
+        .question-card.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .footer-section p {
+            margin-bottom: 15px;
+            color: #b0b7c3;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #b0b7c3;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b0b7c3;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .search-container {
+                margin: 0;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .difficulty-filter {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .difficulty-btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fab fa-flutter"></i>
+                    <h1>Flutter Interview Q&A</h1>
+                </div>
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search questions...">
+                    </div>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <i class="fas fa-question-circle"></i>
+                        <span>300 Questions</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-layer-group"></i>
+                        <span>7 Categories</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <div class="categories">
+                    <div class="category-header">
+                        <span>Question Categories</span>
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="category-list">
+                        <div class="category-item active" data-category="all">
+                            <span>All Questions</span>
+                            <span class="category-count">300</span>
+                        </div>
+                        <div class="category-item" data-category="basic">
+                            <span>Basic Level (1-30)</span>
+                            <span class="category-count">30</span>
+                        </div>
+                        <div class="category-item" data-category="intermediate">
+                            <span>Intermediate Level (31-70)</span>
+                            <span class="category-count">40</span>
+                        </div>
+                        <div class="category-item" data-category="advanced">
+                            <span>Advanced Level (71-100)</span>
+                            <span class="category-count">30</span>
+                        </div>
+                        <div class="category-item" data-category="state-management">
+                            <span>State Management (101-130)</span>
+                            <span class="category-count">30</span>
+                        </div>
+                        <div class="category-item" data-category="dart">
+                            <span>Dart Language (131-160)</span>
+                            <span class="category-count">30</span>
+                        </div>
+                        <div class="category-item" data-category="ui-layout">
+                            <span>UI, Layout & Navigation (161-190)</span>
+                            <span class="category-count">30</span>
+                        </div>
+                        <div class="category-item" data-category="performance">
+                            <span>Performance Optimization (191-220)</span>
+                            <span class="category-count">30</span>
+                        </div>
+                        <div class="category-item" data-category="firebase">
+                            <span>Firebase & Backend (221-250)</span>
+                            <span class="category-count">30</span>
+                        </div>
+                        <div class="category-item" data-category="architecture">
+                            <span>Architecture & Testing (251-280)</span>
+                            <span class="category-count">30</span>
+                        </div>
+                        <div class="category-item" data-category="system-design">
+                            <span>System Design & Native (281-300)</span>
+                            <span class="category-count">20</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="questions-section">
+                <div class="section-header">
+                    <h2 class="section-title">All Questions</h2>
+                    <div class="difficulty-filter">
+                        <button class="difficulty-btn active" data-difficulty="all">All</button>
+                        <button class="difficulty-btn" data-difficulty="basic">Basic</button>
+                        <button class="difficulty-btn" data-difficulty="intermediate">Intermediate</button>
+                        <button class="difficulty-btn" data-difficulty="advanced">Advanced</button>
+                    </div>
+                </div>
+                <div class="questions-container" id="questionsContainer">
+                    <!-- Questions will be dynamically inserted here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About This Resource</h3>
+                    <p>A comprehensive collection of 300 Flutter interview questions with detailed answers, organized by difficulty and category. Perfect for preparing for MNCs and product-based companies.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Flutter Documentation</a></li>
+                        <li><a href="#">Dart Language Tour</a></li>
+                        <li><a href="#">Flutter DevTools</a></li>
+                        <li><a href="#">Flutter Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Basic Concepts</a></li>
+                        <li><a href="#">State Management</a></li>
+                        <li><a href="#">Dart Language</a></li>
+                        <li><a href="#">Performance</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Flutter Interview Questions & Answers. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Questions data structure
+        const questionsData = [
+            // Basic Level (1-30)
+            {
+                id: 1,
+                category: "basic",
+                difficulty: "basic",
+                question: "What is Flutter?",
+                answer: "Flutter is an open-source UI toolkit by Google for building natively compiled applications for mobile, web, and desktop from a single codebase."
+            },
+            {
+                id: 2,
+                category: "basic",
+                difficulty: "basic",
+                question: "What language does Flutter use?",
+                answer: "Dart — a language developed by Google."
+            },
+            {
+                id: 3,
+                category: "basic",
+                difficulty: "basic",
+                question: "What is a Widget in Flutter?",
+                answer: "Everything in Flutter is a widget — text, layout, button, etc. Widgets describe how the UI should look."
+            },
+            {
+                id: 4,
+                category: "basic",
+                difficulty: "basic",
+                question: "Difference between StatelessWidget and StatefulWidget?",
+                answer: "Stateless: immutable, doesn't change during runtime. Stateful: maintains internal state that can change."
+            },
+            {
+                id: 5,
+                category: "basic",
+                difficulty: "basic",
+                question: "What is the BuildContext in Flutter?",
+                answer: "It represents the location of a widget in the widget tree and is used to access theme, size, navigation, etc."
+            },
+            {
+                id: 6,
+                category: "basic",
+                difficulty: "basic",
+                question: "What is Hot Reload vs Hot Restart?",
+                answer: "Hot Reload: Injects updated code without restarting the app. Hot Restart: Restarts the app but preserves code changes."
+            },
+            {
+                id: 7,
+                category: "basic",
+                difficulty: "basic",
+                question: "What is the Widget Tree?",
+                answer: "The hierarchical structure that defines how widgets are nested and rendered on the screen."
+            },
+            {
+                id: 8,
+                category: "basic",
+                difficulty: "basic",
+                question: "What is setState()?",
+                answer: "It notifies Flutter that the state of a widget has changed and triggers a rebuild."
+            },
+            {
+                id: 9,
+                category: "basic",
+                difficulty: "basic",
+                question: "Explain the difference between mainAxisAlignment and crossAxisAlignment.",
+                answer: "Used in Row/Column to align children horizontally and vertically respectively."
+            },
+            {
+                id: 10,
+                category: "basic",
+                difficulty: "basic",
+                question: "What is MaterialApp?",
+                answer: "A convenience widget that wraps several widgets for a Material Design app (theme, routing, etc.)."
+            },
+            // Intermediate Level (31-70)
+            {
+                id: 31,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "What are mixins in Dart?",
+                answer: "Reusable classes that can be added to other classes using the `with` keyword."
+            },
+            {
+                id: 32,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "What is Future in Dart?",
+                answer: "Represents a potential value or error that will be available at some time in the future."
+            },
+            {
+                id: 33,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "What is async/await in Dart?",
+                answer: "Used for writing asynchronous code in a synchronous style."
+            },
+            {
+                id: 34,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "What are Streams in Flutter?",
+                answer: "Provide a sequence of asynchronous data events over time."
+            },
+            {
+                id: 35,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "Difference between FutureBuilder and StreamBuilder?",
+                answer: "FutureBuilder: One-time async operation. StreamBuilder: Multiple async data updates."
+            },
+            {
+                id: 36,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "What is BLoC pattern?",
+                answer: "Business Logic Component — separates UI from business logic using streams."
+            },
+            {
+                id: 37,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "What is Provider?",
+                answer: "A state management solution using inherited widgets to manage and propagate state efficiently."
+            },
+            {
+                id: 38,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "Explain InheritedWidget.",
+                answer: "Base class for propagating data down the widget tree."
+            },
+            {
+                id: 39,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "What is Dependency Injection (DI)?",
+                answer: "Providing dependencies (like controllers, services) from outside rather than creating them inside a class."
+            },
+            {
+                id: 40,
+                category: "intermediate",
+                difficulty: "intermediate",
+                question: "What is a Navigator 2.0?",
+                answer: "A declarative navigation system allowing more flexible route handling (e.g., web-style URLs)."
+            },
+            // Advanced Level (71-100)
+            {
+                id: 71,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "What is isolate in Dart?",
+                answer: "A separate thread of execution used for parallelism."
+            },
+            {
+                id: 72,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "How do you perform background tasks?",
+                answer: "Using isolates or background services like `workmanager`."
+            },
+            {
+                id: 73,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "What is the difference between synchronous and asynchronous code?",
+                answer: "Sync: Executes line by line. Async: Doesn't block execution."
+            },
+            {
+                id: 74,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "What is event loop in Dart?",
+                answer: "Handles async tasks by scheduling events and microtasks."
+            },
+            {
+                id: 75,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "What is microtask vs event queue?",
+                answer: "Microtasks run before event queue in the Dart async model."
+            },
+            {
+                id: 76,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "Explain Flutter's rendering pipeline.",
+                answer: "Widget → Element → RenderObject → Layer → Paint → Compositor."
+            },
+            {
+                id: 77,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "How do you handle dependency injection?",
+                answer: "Using `get_it`, `riverpod`, or `injectable`."
+            },
+            {
+                id: 78,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "What are some best practices for Flutter architecture?",
+                answer: "Use clean architecture, separate layers, dependency inversion, use immutable state."
+            },
+            {
+                id: 79,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "What is the repository pattern?",
+                answer: "Abstracts data sources (API, DB) and provides a consistent interface."
+            },
+            {
+                id: 80,
+                category: "advanced",
+                difficulty: "advanced",
+                question: "What is Flutter's build phases?",
+                answer: "Build → Layout → Paint → Composite → Display."
+            },
+            // State Management (101-130)
+            {
+                id: 101,
+                category: "state-management",
+                difficulty: "intermediate",
+                question: "What is state management in Flutter, and why is it important?",
+                answer: "State management refers to how you manage and share the state (data) of your application across different widgets. It's important for building scalable, maintainable apps with predictable behavior."
+            },
+            {
+                id: 102,
+                category: "state-management",
+                difficulty: "intermediate",
+                question: "Compare Provider vs BLoC vs Riverpod.",
+                answer: "Provider: Simplest, based on InheritedWidget. BLoC: More structured, uses streams. Riverpod: Improved Provider with compile-time safety and better testability."
+            },
+            {
+                id: 103,
+                category: "state-management",
+                difficulty: "intermediate",
+                question: "When should you use `ChangeNotifier`?",
+                answer: "Use ChangeNotifier for simple state that needs to notify listeners when it changes. Good for local state management in smaller apps."
+            },
+            {
+                id: 104,
+                category: "state-management",
+                difficulty: "intermediate",
+                question: "What is the `Consumer` widget in Provider?",
+                answer: "Consumer is a widget that listens to changes in a Provider and rebuilds only the necessary parts of the widget tree when the state changes."
+            },
+            {
+                id: 105,
+                category: "state-management",
+                difficulty: "intermediate",
+                question: "How does `Selector` help in Provider optimization?",
+                answer: "Selector rebuilds only when specific parts of the state change, preventing unnecessary widget rebuilds and improving performance."
+            },
+            // Dart Language (131-160)
+            {
+                id: 131,
+                category: "dart",
+                difficulty: "intermediate",
+                question: "What are Dart isolates, and how do they differ from threads?",
+                answer: "Isolates are separate memory heaps that don't share memory, communicating via message passing. Threads share memory and can lead to race conditions."
+            },
+            {
+                id: 132,
+                category: "dart",
+                difficulty: "intermediate",
+                question: "Explain the difference between abstract classes and interfaces in Dart.",
+                answer: "Abstract classes can have both implemented and unimplemented methods. Interfaces define a contract that classes must implement (Dart doesn't have a separate interface keyword - any class can be an interface)."
+            },
+            {
+                id: 133,
+                category: "dart",
+                difficulty: "basic",
+                question: "What is the '??' operator used for?",
+                answer: "Null-aware operator that returns the left expression if it's not null, otherwise returns the right expression."
+            },
+            {
+                id: 134,
+                category: "dart",
+                difficulty: "intermediate",
+                question: "What does the '?..' cascade operator do?",
+                answer: "Null-aware cascade operator that performs multiple operations on an object only if it's not null."
+            },
+            {
+                id: 135,
+                category: "dart",
+                difficulty: "intermediate",
+                question: "What's the difference between '==' and 'identical()'?",
+                answer: "'==' checks for value equality, 'identical()' checks if two references point to the same object in memory."
+            },
+            // UI, Layout & Navigation (161-190)
+            {
+                id: 161,
+                category: "ui-layout",
+                difficulty: "basic",
+                question: "What is the widget lifecycle of a StatelessWidget?",
+                answer: "StatelessWidget has a simple lifecycle: constructor → build method. It doesn't maintain state."
+            },
+            {
+                id: 162,
+                category: "ui-layout",
+                difficulty: "intermediate",
+                question: "Explain how `didUpdateWidget` works.",
+                answer: "Called when the parent widget rebuilds and provides a new widget. Used to respond to widget property changes."
+            },
+            {
+                id: 163,
+                category: "ui-layout",
+                difficulty: "intermediate",
+                question: "What's the use of `LayoutBuilder`?",
+                answer: "Builds a widget tree that can depend on the parent widget's size constraints."
+            },
+            {
+                id: 164,
+                category: "ui-layout",
+                difficulty: "advanced",
+                question: "What is `CustomMultiChildLayout`?",
+                answer: "A widget that uses a delegate to position and size multiple children according to custom logic."
+            },
+            {
+                id: 165,
+                category: "ui-layout",
+                difficulty: "intermediate",
+                question: "Difference between IntrinsicWidth and ConstrainedBox.",
+                answer: "IntrinsicWidth sizes its child to the child's intrinsic width. ConstrainedBox imposes additional constraints on its child."
+            },
+            // Performance Optimization (191-220)
+            {
+                id: 191,
+                category: "performance",
+                difficulty: "intermediate",
+                question: "What causes widget rebuilds in Flutter?",
+                answer: "Widget rebuilds occur when: 1) Parent widget rebuilds, 2) State changes (setState), 3) InheritedWidget notifies dependents, 4) Animation tick."
+            },
+            {
+                id: 192,
+                category: "performance",
+                difficulty: "intermediate",
+                question: "How to prevent unnecessary rebuilds?",
+                answer: "Use const constructors, split large widgets into smaller ones, use Provider's Consumer/Selector, use RepaintBoundary."
+            },
+            {
+                id: 193,
+                category: "performance",
+                difficulty: "intermediate",
+                question: "How to profile a Flutter app?",
+                answer: "Use Flutter DevTools to monitor performance, check widget rebuilds, analyze rendering, and identify memory leaks."
+            },
+            {
+                id: 194,
+                category: "performance",
+                difficulty: "advanced",
+                question: "How does RepaintBoundary improve performance?",
+                answer: "Creates a separate render layer, limiting the scope of repaints when a widget changes."
+            },
+            {
+                id: 195,
+                category: "performance",
+                difficulty: "intermediate",
+                question: "What is frame skipping and jank?",
+                answer: "Frame skipping occurs when the UI can't render at 60fps. Jank is the visible stutter that results from skipped frames."
+            },
+            // Firebase & Backend Integration (221-250)
+            {
+                id: 221,
+                category: "firebase",
+                difficulty: "basic",
+                question: "How do you connect Flutter with Firebase?",
+                answer: "Add Firebase dependencies in pubspec.yaml, download google-services.json (Android) or GoogleService-Info.plist (iOS), and initialize Firebase in your app."
+            },
+            {
+                id: 222,
+                category: "firebase",
+                difficulty: "intermediate",
+                question: "What's the difference between Firebase Auth and FirebaseUI Auth?",
+                answer: "Firebase Auth provides the core authentication API. FirebaseUI Auth provides pre-built UI components for common auth flows."
+            },
+            {
+                id: 223,
+                category: "firebase",
+                difficulty: "intermediate",
+                question: "How to handle Firebase Firestore streams?",
+                answer: "Use StreamBuilder to listen to Firestore document or query snapshots and rebuild UI when data changes."
+            },
+            {
+                id: 224,
+                category: "firebase",
+                difficulty: "intermediate",
+                question: "How do you structure Firestore collections?",
+                answer: "Follow a hierarchical structure: users/{userId}/documents, organize data to minimize reads, and denormalize when necessary for performance."
+            },
+            {
+                id: 225,
+                category: "firebase",
+                difficulty: "advanced",
+                question: "How to use Firebase Cloud Functions with Flutter?",
+                answer: "Call Cloud Functions from Flutter using the firebase_functions package, typically for server-side logic, data validation, or complex operations."
+            },
+            // Architecture, Testing & Deployment (251-280)
+            {
+                id: 251,
+                category: "architecture",
+                difficulty: "advanced",
+                question: "What is Clean Architecture in Flutter?",
+                answer: "An architectural pattern that separates concerns into layers: domain (business logic), data (data sources), and presentation (UI)."
+            },
+            {
+                id: 252,
+                category: "architecture",
+                difficulty: "advanced",
+                question: "Explain domain, data, and presentation layers.",
+                answer: "Domain: Contains business logic and entities. Data: Handles data retrieval from various sources. Presentation: Manages UI and user interactions."
+            },
+            {
+                id: 253,
+                category: "architecture",
+                difficulty: "intermediate",
+                question: "What is Repository pattern?",
+                answer: "An abstraction that mediates between the domain and data layers, providing a clean API for data operations."
+            },
+            {
+                id: 254,
+                category: "architecture",
+                difficulty: "intermediate",
+                question: "Why separate UI and business logic?",
+                answer: "Improves testability, maintainability, and allows UI and business logic to evolve independently."
+            },
+            {
+                id: 255,
+                category: "architecture",
+                difficulty: "advanced",
+                question: "What is dependency inversion?",
+                answer: "High-level modules should not depend on low-level modules. Both should depend on abstractions."
+            },
+            // System Design & Native Integration (281-300)
+            {
+                id: 281,
+                category: "system-design",
+                difficulty: "advanced",
+                question: "How does Flutter communicate with native code?",
+                answer: "Through platform channels that allow message passing between Dart and native (Kotlin/Java for Android, Swift/Objective-C for iOS)."
+            },
+            {
+                id: 282,
+                category: "system-design",
+                difficulty: "advanced",
+                question: "What are platform channels?",
+                answer: "Mechanisms for bidirectional communication between Flutter and the host platform, using MethodChannel, EventChannel, and BasicMessageChannel."
+            },
+            {
+                id: 283,
+                category: "system-design",
+                difficulty: "advanced",
+                question: "What are MethodChannels, EventChannels, and BasicMessageChannels?",
+                answer: "MethodChannel: For method invocation. EventChannel: For event streams. BasicMessageChannel: For basic message passing with a codec."
+            },
+            {
+                id: 284,
+                category: "system-design",
+                difficulty: "advanced",
+                question: "How do you call native Android code from Flutter?",
+                answer: "Create a MethodChannel in Flutter, implement the method handler in Android (Kotlin/Java), and invoke the method from Flutter."
+            },
+            {
+                id: 285,
+                category: "system-design",
+                difficulty: "advanced",
+                question: "How do you embed Flutter in existing Android/iOS apps?",
+                answer: "Use FlutterEngine and FlutterViewController (iOS) or FlutterFragment/FlutterView (Android) to add Flutter screens to existing native apps."
+            }
+        ];
+
+        // DOM elements
+        const questionsContainer = document.getElementById('questionsContainer');
+        const categoryItems = document.querySelectorAll('.category-item');
+        const difficultyBtns = document.querySelectorAll('.difficulty-btn');
+        const searchInput = document.getElementById('searchInput');
+
+        // Initialize the page with all questions
+        function initializeQuestions() {
+            displayQuestions(questionsData);
+            setupEventListeners();
+        }
+
+        // Display questions in the container
+        function displayQuestions(questions) {
+            questionsContainer.innerHTML = '';
+            
+            if (questions.length === 0) {
+                questionsContainer.innerHTML = '<div class="no-results">No questions match your search criteria.</div>';
+                return;
+            }
+            
+            questions.forEach(q => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.setAttribute('data-id', q.id);
+                questionCard.setAttribute('data-category', q.category);
+                questionCard.setAttribute('data-difficulty', q.difficulty);
+                
+                questionCard.innerHTML = `
+                    <div class="question-header">
+                        <div class="question-title">
+                            <span class="question-number">${q.id}</span>
+                            <span>${q.question}</span>
+                        </div>
+                        <div class="question-meta">
+                            <span class="question-difficulty difficulty-${q.difficulty}">${q.difficulty}</span>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                    </div>
+                    <div class="question-answer">
+                        <div class="answer-content">
+                            ${formatAnswer(q.answer)}
+                        </div>
+                    </div>
+                `;
+                
+                questionsContainer.appendChild(questionCard);
+            });
+            
+            // Add click event to question headers
+            document.querySelectorAll('.question-header').forEach(header => {
+                header.addEventListener('click', function() {
+                    const card = this.parentElement;
+                    const answer = card.querySelector('.question-answer');
+                    
+                    // Close all other open answers
+                    document.querySelectorAll('.question-answer.active').forEach(activeAnswer => {
+                        if (activeAnswer !== answer) {
+                            activeAnswer.classList.remove('active');
+                            activeAnswer.parentElement.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current answer
+                    answer.classList.toggle('active');
+                    card.classList.toggle('active');
+                });
+            });
+        }
+
+        // Format answer text (convert line breaks to paragraphs, etc.)
+        function formatAnswer(answer) {
+            // Simple formatting - in a real app you might use a markdown parser
+            return `<p>${answer}</p>`;
+        }
+
+        // Filter questions based on category and difficulty
+        function filterQuestions() {
+            const activeCategory = document.querySelector('.category-item.active').getAttribute('data-category');
+            const activeDifficulty = document.querySelector('.difficulty-btn.active').getAttribute('data-difficulty');
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            let filteredQuestions = questionsData;
+            
+            // Filter by category
+            if (activeCategory !== 'all') {
+                filteredQuestions = filteredQuestions.filter(q => q.category === activeCategory);
+            }
+            
+            // Filter by difficulty
+            if (activeDifficulty !== 'all') {
+                filteredQuestions = filteredQuestions.filter(q => q.difficulty === activeDifficulty);
+            }
+            
+            // Filter by search term
+            if (searchTerm) {
+                filteredQuestions = filteredQuestions.filter(q => 
+                    q.question.toLowerCase().includes(searchTerm) || 
+                    q.answer.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            displayQuestions(filteredQuestions);
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Category filter
+            categoryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    categoryItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    filterQuestions();
+                });
+            });
+            
+            // Difficulty filter
+            difficultyBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    difficultyBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    filterQuestions();
+                });
+            });
+            
+            // Search input
+            searchInput.addEventListener('input', filterQuestions);
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', initializeQuestions);
+    </script>
+</body>
+</html>
